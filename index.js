@@ -12,8 +12,10 @@ app.get('/planetas/:id', (req, res) => {
 
     if(id) {
         res.json(id);
+    } else if(isNaN(parseInt(req.params.id))) {
+        res.status(400).json({'Erro' : 'Requisição inválida!'});
     } else {
-        res.status(404).json({'erro' : 'Nenhum planeta encontrado'});
+        res.status(404).json({'Erro' : 'Nenhum planeta encontrado!'});
     }
 });
 
