@@ -1,10 +1,13 @@
 const express = require('express');
 const app = express();
 
-const { buscarPlanetas } = require('./servicos/servicos');
+const { buscarPlanetas, buscarPlanetasPorNome, buscarPlanetasPorId } = require('./servicos/servicos');
 
 app.get('/planetas', (req, res) => {
-    res.json(buscarPlanetas());
+    let planeta = req.query.planeta;
+    let resultado = planeta ? buscarPlanetasPorNome(planeta) : buscarPlanetas();
+
+    res.json({ resultado : resultado })
 });
 
 app.get('/planetas/:id', (req, res) => {
